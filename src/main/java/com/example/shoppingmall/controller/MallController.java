@@ -5,6 +5,7 @@ import com.example.shoppingmall.service.MallService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.awt.print.Book;
 import java.util.List;
 
 @RestController
@@ -27,4 +28,13 @@ public class MallController {
     public List<BooksDto> getBooks(){
         return mallService.getBooksList();
     }
+
+    // 도서 상세
+    @GetMapping("/books/{bookid}")
+    public BooksDto detailBook(@PathVariable int bookid){
+        BooksDto detail = mallService.detailBook(bookid);
+        System.out.println("detail => " + detail);
+        return detail;
+    }
+
 }

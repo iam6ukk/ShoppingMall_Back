@@ -9,4 +9,11 @@
         SELECT *
         FROM books;
     </select>
+
+    <!-- -->
+    <select id="detailBook" resultType="com.example.shoppingmall.dto.BooksDto">
+        SELECT *
+        FROM books
+        WHERE bookid = #{bookid};
+    </select>
 </mapper>
