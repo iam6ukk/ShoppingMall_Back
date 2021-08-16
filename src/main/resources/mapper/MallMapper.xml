@@ -10,7 +10,13 @@
         FROM books;
     </select>
 
-    <!-- -->
+    <!-- 도서 목록 + 페이징 -->
+    <select id="getPageBookList" resultType="com.example.shoppingmall.dto.BooksDto">
+        SELECT *
+        FROM Books;
+    </select>
+
+    <!-- 도서 상세 -->
     <select id="detailBook" resultType="com.example.shoppingmall.dto.BooksDto">
         SELECT *
         FROM books

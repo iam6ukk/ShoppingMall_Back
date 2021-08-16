@@ -2,6 +2,7 @@ package com.example.shoppingmall.controller;
 
 import com.example.shoppingmall.dto.BooksDto;
 import com.example.shoppingmall.service.MallService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,10 +25,20 @@ public class MallController {
     }
 
     // 도서 목록 가져오기
+//    @GetMapping("/books")
+//    public List<BooksDto> getBooks(){
+//        return mallService.getBooksList();
+//    }
+
+    // 도서 목록 + 페이징
     @GetMapping("/books")
-    public List<BooksDto> getBooks(){
-        return mallService.getBooksList();
-    }
+    public PageInfo<BooksDto> getPageBooks(
+            @RequestParam(value = "pageNum", required = false) int page) {
+        List<BooksDto> result = mallService.getPageBookList(page, 6);
+        PageInfo<BooksDto> pi = new PageInfo<BooksDto>(result);
+        return pi;
+    } //defaultValue = "1"
+
 
     // 도서 상세
     @GetMapping("/books/{bookid}")
