@@ -33,9 +33,10 @@ public class MallController {
     // 도서 목록 + 페이징
     @GetMapping("/books")
     public PageInfo<BooksDto> getPageBooks(
-            @RequestParam(value = "pageNum", required = false) int page) {
+            @RequestParam(value = "pageNum", required = false, defaultValue = "1") int page) {
         List<BooksDto> result = mallService.getPageBookList(page, 6);
         PageInfo<BooksDto> pi = new PageInfo<BooksDto>(result);
+        System.out.println("reuslt => " + result);
         return pi;
     } //defaultValue = "1"
 
@@ -47,5 +48,8 @@ public class MallController {
         System.out.println("detail => " + detail);
         return detail;
     }
+
+
+
 
 }
