@@ -1,6 +1,7 @@
 package com.example.shoppingmall.service.impl;
 
 import com.example.shoppingmall.dto.BooksDto;
+import com.example.shoppingmall.dto.CustomersDto;
 import com.example.shoppingmall.mapper.MallMapper;
 import com.example.shoppingmall.service.MallService;
 import com.github.pagehelper.PageHelper;
@@ -8,13 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.awt.print.Book;
+
 import java.util.List;
+import java.util.Map;
 
 @Service("mallService")
 public class MailServiceImpl implements MallService {
 
-    @Resource
+    @Autowired
+//    @Resource
     private MallMapper mallMapper;
 
     // 도서 목록
@@ -45,4 +48,10 @@ public class MailServiceImpl implements MallService {
         return resultBook;
     }
 
+    // 로그인
+    @Override
+    public CustomersDto logIn(CustomersDto customersDto){
+
+       return mallMapper.logIn(customersDto);
+    }
 }
