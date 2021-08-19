@@ -2,24 +2,27 @@ package com.example.shoppingmall.mapper;
 
 import com.example.shoppingmall.dto.BooksDto;
 import com.example.shoppingmall.dto.CustomersDto;
+import com.example.shoppingmall.model.Book;
+import com.example.shoppingmall.dto.request.LoginRequestDto;
+
+import com.example.shoppingmall.dto.response.LoginResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.awt.datatransfer.Clipboard;
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface MallMapper {
 
-    // 도서 목록
-    List<BooksDto> getBooksList();
+    // 도서 목록s
+//    List<Book> getBooksList();
 
     // 도서 목록 + 페이징
-    List<BooksDto> getPageBookList();
+    List<Book> getPageBookList();
 
     // 도서 상세
-    BooksDto detailBook(int bookid);
+    Book detailBook(Integer bookId);
 
     // 로그인
-    CustomersDto logIn(CustomersDto customersDto);
+    LoginResponseDto logIn(LoginRequestDto loginRequestDto);
+
 }

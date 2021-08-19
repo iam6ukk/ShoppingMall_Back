@@ -5,28 +5,28 @@
 <mapper namespace="com.example.shoppingmall.mapper.MallMapper">
 
     <!-- 도서 목록 -->
-    <select id="getBooksList" resultType="com.example.shoppingmall.dto.BooksDto">
+    <select id="getBooksList" resultType="com.example.shoppingmall.model.Book">
         SELECT *
         FROM books;
     </select>
 
     <!-- 도서 목록 + 페이징 -->
-    <select id="getPageBookList" resultType="com.example.shoppingmall.dto.BooksDto">
+    <select id="getPageBookList" resultType="com.example.shoppingmall.model.Book">
         SELECT *
-        FROM Books;
+        FROM books;
     </select>
 
     <!-- 도서 상세 -->
-    <select id="detailBook" resultType="com.example.shoppingmall.dto.BooksDto">
+    <select id="detailBook" resultType="com.example.shoppingmall.model.Book">
         SELECT *
         FROM books
-        WHERE bookid = #{bookid};
+        WHERE bookid = #{bookId};
     </select>
 
     <!-- 로그인 -->
-    <select id="logIn"  resultType="com.example.shoppingmall.dto.CustomersDto">
+    <select id="logIn"  resultType="com.example.shoppingmall.dto.response.LoginResponseDto">
         SELECT *
         FROM customers
-        WHERE custid=#{custid} AND custpwd=#{custpwd};
+        WHERE custid=#{custId} AND custpwd=#{custPwd};
     </select>
 </mapper>
