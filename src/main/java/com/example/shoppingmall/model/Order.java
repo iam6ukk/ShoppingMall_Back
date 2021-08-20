@@ -13,17 +13,17 @@ public class Order{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, name = "orderid", nullable = false)
-    private Integer orderId;
+    private int orderid;
 
     @Column(name = "custnum")
-    private Integer custNum;
+    private int custnum;
 
     @Column(name = "bookid")
-    private Integer bookId;
+    private int bookid;
 
     @Column(name = "orderprice")
-    private Integer orderPrice;
+    private int orderprice;
 
     @Column(name = "orderdate")
-    private LocalDateTime orderDate;
+    private LocalDateTime orderdate;
 }

@@ -2,15 +2,17 @@ package com.example.shoppingmall.controller;
 
 import com.example.shoppingmall.dto.BooksDto;
 
-import com.example.shoppingmall.dto.request.LoginRequestDto;
 import com.example.shoppingmall.dto.response.LoginResponseDto;
+import com.example.shoppingmall.model.Book;
 import com.example.shoppingmall.service.MallService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import com.example.shoppingmall.dto.request.LoginRequestDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
-import sun.rmi.runtime.Log;
+
 
 import javax.annotation.Resource;
 
@@ -36,22 +38,37 @@ public class MallController {
 //        return mallService.getBooksList();
 //    }
 
-    // 도서 목록 + 페이징
+    // 도서 목록 + 페이징 (model)
     @GetMapping("")
-    public PageInfo<BooksDto> getPageBooks(
+    public PageInfo<Book> getPageBooks(
             @RequestParam(value = "pageNum", required = false, defaultValue = "1") int page) {
-        List<BooksDto> result = mallService.getPageBookList(page, 6);
-        PageInfo<BooksDto> pi = new PageInfo<BooksDto>(result);
-        System.out.println("페이징 결과 => " + result);
+        List<Book> result = mallService.getPageBookList(page, 6);
+        PageInfo<Book> pi = new PageInfo<Book>(result);
         return pi;
     }
 
 
+    // 도서 목록 + 페이징 (model -> dto)
+//    @GetMapping("")
+//    public PageInfo<BooksDto> getPageBooks(
+//            @RequestParam(value = "pageNum", required = false, defaultValue = "1") int page) {
+////        List<BooksDto> result = mallService.getPageBookList(page, 6);
+////        Page<BooksDto> result = mallService.getPageBookList(page, 6);
+////        PageInfo<BooksDto> result = mallService.getPageBookList(page, 6);
+//
+//        List<BooksDto> result = mallService.getPageBookList(page,  6);
+//        PageInfo<BooksDto> pi = new PageInfo<BooksDto>(result);
+//
+//        return pi;
+//    }
+
+
     // 도서 상세
-    @GetMapping("/{bookId}")
-    public BooksDto detailBook(@PathVariable Integer bookId){
-        BooksDto detail = mallService.detailBook(bookId);
+    @GetMapping("/{bookid}")
+    public BooksDto detailBook(@PathVariable int bookid){
+        BooksDto detail = mallService.detailBook(bookid);
         System.out.println("도서 상세 조회 => " + detail);
+
         return detail;
     }
 
@@ -68,11 +85,14 @@ public class MallController {
 
         if(loginResponseDto.getResultCode() == 1){
             httpSession = request.getSession();
-            httpSession.setAttribute("LoginUser", loginResponseDto.getCustNum());
+            httpSession.setAttribute("LoginUser", loginResponseDto.getCustnum());
             System.out.println("로그인 성공");
-        } else {
+        } if(loginResponseDto.getResultCode() != 1){
             System.out.println("로그인 실패");
         }
+//        else {
+//            System.out.println("로그인 실패");
+//        }
 
         return loginResponseDto;
 

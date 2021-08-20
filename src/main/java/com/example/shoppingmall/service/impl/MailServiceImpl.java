@@ -6,12 +6,15 @@ import com.example.shoppingmall.dto.response.LoginResponseDto;
 import com.example.shoppingmall.mapper.MallMapper;
 import com.example.shoppingmall.model.Book;
 import com.example.shoppingmall.service.MallService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 @Service("mallService")
 public class MailServiceImpl implements MallService {
@@ -26,50 +29,99 @@ public class MailServiceImpl implements MallService {
 //        return mallMapper.getBooksList();
 //    }
 
-    // 도서 목록 + 페이징
+    // 도서 목록 + 페이징 (model)
     @Override
-    public List<BooksDto> getPageBookList(int page, int pageSize){
-        List<Book> result = null;
+    public List<Book> getPageBookList(int page, int pageSize){
 
-//        BooksDto resultDto = new BooksDto();
-        List<BooksDto> resultList = new ArrayList<>();
+        List<Book> result = new ArrayList<>();
+
         try{
             PageHelper.startPage(page, pageSize);
-            PageHelper.orderBy("bookId ASC");
+            PageHelper.orderBy("bookid ASC");
             result = mallMapper.getPageBookList();
-            result.stream()
-                    .forEach(book -> resultList.add(new BooksDto().builder()
-                            .bookId(book.getBookId())
-                            .bookName(book.getBookName())
-                            .bookUrl(book.getBookUrl())
-                            .publisher(book.getPublisher())
-                            .price(book.getPrice())
-                            .author(book.getAuthor())
-                            .description(book.getDescription())
-                            .publishDate(book.getPublishDate())
-                            .build()));
+
+//            PageInfo<Book> = new PageInfo<>(resultList);
+
+//            List<Book> resultList = mallMapper.getPageBookList();
+//            resultList.forEach(book -> result.add(new BooksDto().builder()
+//                            .bookid(book.getBookid())
+//                            .bookname(book.getBookname())
+//                            .bookurl(book.getBookurl())
+//                            .publisher(book.getPublisher())
+//                            .price(book.getPrice())
+//                            .author(book.getAuthor())
+//                            .description(book.getDescription())
+//                            .publishdate(book.getPublishdate())
+//                            .build()));
+
         } catch(Exception e){
             e.printStackTrace();
         }
-        return resultList;
+        return result;
     }
+
+//    // 도서 목록 + 페이징 (model -> dto)
+//    @Override
+//    public List<BooksDto> getPageBookList(int page, int pageSize){
+////        List<Book> resultList = new ArrayList<Book>();
+//
+//        List<Book> result = new ArrayList<>();
+//        PageInfo<BooksDto> resultBooks = new PageInfo<>();
+//
+//        try{
+//            PageHelper.startPage(page, pageSize);
+//            PageHelper.orderBy("bookid ASC");
+//            // mapper 실행 후 후 처리 함
+//
+//            result = mallMapper.getPageBookList();
+//            // Mapper 함수 호츨 결과 값 result에
+//
+//
+//            PageInfo<BooksDto> resultBooks = new PageInfo<BooksDto>(result.forEach(book -> resultBooks.add(new BooksDto().builder()
+//                        .bookid(book.getBookid())
+//                        .bookname(book.getBookname())
+//                        .bookurl(book.getBookurl())
+//                        .publishdate(book.getPublishdate())
+//                        .description(book.getDescription())
+//                        .author(book.getAuthor())
+//                        .price(book.getPrice())
+//                        .publishdate(book.getPublishdate())
+//                        .build())));
+//
+//            result.forEach(book -> resultBooks.add(new BooksDto().builder()
+//                            .bookid(book.getBookid())
+//                            .bookname(book.getBookname())
+//                            .bookurl(book.getBookurl())
+//                            .publisher(book.getPublisher())
+//                            .price(book.getPrice())
+//                            .author(book.getAuthor())
+//                            .description(book.getDescription())
+//                            .publishdate(book.getPublishdate())
+//                            .build()));
+//
+//
+//        } catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        return resultBooks;
+//    }
 
     // 도서 상세
     @Override
-    public BooksDto detailBook(Integer bookId){
+    public BooksDto detailBook(int bookid){
         Book result = null;
         BooksDto resultDto = new BooksDto();
 
-        result = mallMapper.detailBook(bookId);
+        result = mallMapper.detailBook(bookid);
         return new BooksDto().builder()
-                .bookId(result.getBookId())
-                .bookName(result.getBookName())
-                .author(result.getAuthor())
-                .bookUrl(result.getBookUrl())
+                .bookid(result.getBookid())
+                .bookname(result.getBookname())
+                .bookurl(result.getBookurl())
                 .publisher(result.getPublisher())
                 .price(result.getPrice())
+                .author(result.getAuthor())
                 .description(result.getDescription())
-                .publishDate(result.getPublishDate())
+                .publishdate(result.getPublishdate())
                 .build();
     }
 
@@ -81,7 +133,6 @@ public class MailServiceImpl implements MallService {
 //        c = mallMapper.logIn(loginRequestDto);
 
 //        if (c == null)  l.setResultCode(-1);
-//        LoginResponseDto l = new LoginResponseDto();
 
         LoginResponseDto l = mallMapper.logIn(loginRequestDto);
         System.out.println("Impl 실행 결과 => " + l);
@@ -90,6 +141,7 @@ public class MailServiceImpl implements MallService {
             l.setResultCode(-1);
             System.out.println("l =>" + l);
         }
+
         return l;
     }
 }

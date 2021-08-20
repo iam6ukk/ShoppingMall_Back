@@ -6,7 +6,7 @@ import lombok.Data;
 public class LoginResponseDto {
 
     private Integer resultCode = 1; // 성공일 경우
-    private Integer custNum;
-    private String custName;
-    private String custId;
+    private Integer custnum;
+    private String custname;
+    private String custid;
 }

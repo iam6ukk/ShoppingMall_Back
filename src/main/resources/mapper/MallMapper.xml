@@ -16,17 +16,18 @@
         FROM books;
     </select>
 
+
     <!-- 도서 상세 -->
     <select id="detailBook" resultType="com.example.shoppingmall.model.Book">
         SELECT *
         FROM books
-        WHERE bookid = #{bookId};
+        WHERE bookid = #{bookid};
     </select>
 
     <!-- 로그인 -->
     <select id="logIn"  resultType="com.example.shoppingmall.dto.response.LoginResponseDto">
         SELECT *
         FROM customers
-        WHERE custid=#{custId} AND custpwd=#{custPwd};
+        WHERE custid=#{custid} AND custpwd=#{custpwd};
     </select>
 </mapper>

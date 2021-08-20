@@ -15,10 +15,10 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, name = "bookid", nullable = false)
-    private Integer bookId;
+    private int bookid;
 
     @Column(name="bookname")
-    private String bookName;
+    private String bookname;
 
     @Column(name = "publisher")
     private String publisher;
@@ -27,15 +27,15 @@ public class Book {
     private String author;
 
     @Column(name = "price")
-    private Integer price;
+    private int price;
 
     @Column(name = "bookurl")
-    private String bookUrl;
+    private String bookurl;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "publishdate")
-    private LocalDateTime publishDate;
+    private LocalDateTime publishdate;
 
 }

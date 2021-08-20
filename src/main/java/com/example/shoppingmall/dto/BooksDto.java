@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class BooksDto {
 
-    public Integer bookId;
-    public String bookName;
+    public int bookid;
+    public String bookname;
     public String publisher;
     public String author;
-    public Integer price;
-    public String bookUrl;
+    public int price;
+    public String bookurl;
     public String description;
-    public LocalDateTime publishDate;
+    public LocalDateTime publishdate;
 
 }

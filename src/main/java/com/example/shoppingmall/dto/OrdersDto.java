@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 @Data
 public class OrdersDto {
 
-    public Integer orderId;
-    public Integer custNum;
-    public Integer bookId;
-    public Integer orderPrice;
-    public String orderDate;
+    public Integer orderid;
+    public Integer custnum;
+    public Integer bookid;
+    public Integer orderprice;
+    public LocalDateTime orderdate;
 }

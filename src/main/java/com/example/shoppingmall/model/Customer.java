@@ -12,15 +12,15 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, name = "custnum", nullable = false)
-    private Integer custNum;
+    private int custnum;
 
     @Column(name = "custid")
-    private String custId;
+    private String custid;
 
     @Column(name = "custpwd")
     private String custpwd;
 
     @Column(name = "custname")
-    private String custName;
+    private String custname;
 
 }
