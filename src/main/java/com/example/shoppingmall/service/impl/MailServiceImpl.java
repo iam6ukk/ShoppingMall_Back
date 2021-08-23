@@ -1,17 +1,24 @@
 package com.example.shoppingmall.service.impl;
 
 import com.example.shoppingmall.dto.BooksDto;
+import com.example.shoppingmall.dto.CustomersDto;
 import com.example.shoppingmall.dto.request.LoginRequestDto;
 import com.example.shoppingmall.dto.response.LoginResponseDto;
 import com.example.shoppingmall.mapper.MallMapper;
 import com.example.shoppingmall.model.Book;
+import com.example.shoppingmall.model.Customer;
 import com.example.shoppingmall.service.MallService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
@@ -125,23 +132,17 @@ public class MailServiceImpl implements MallService {
                 .build();
     }
 
-    // 로그인
     @Override
-    public LoginResponseDto logIn(LoginRequestDto loginRequestDto){
-
-//        CustomersDto c = new CustomersDto();
-//        c = mallMapper.logIn(loginRequestDto);
-
-//        if (c == null)  l.setResultCode(-1);
-
+    public LoginResponseDto logIn(LoginRequestDto loginRequestDto) {
         LoginResponseDto l = mallMapper.logIn(loginRequestDto);
         System.out.println("Impl 실행 결과 => " + l);
 
-        if(l == null){
+        if (l == null) {
             l.setResultCode(-1);
-            System.out.println("l =>" + l);
+            System.out.println("l =>" + l.getResultCode());
         }
 
         return l;
     }
+
 }

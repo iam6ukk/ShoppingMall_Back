@@ -10,6 +10,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -30,5 +31,7 @@ public interface MallMapper {
 
     // 로그인
     LoginResponseDto logIn(LoginRequestDto loginRequestDto);
+
+
 
 }

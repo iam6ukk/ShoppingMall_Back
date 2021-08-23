@@ -5,7 +5,6 @@ import com.example.shoppingmall.dto.BooksDto;
 import com.example.shoppingmall.dto.response.LoginResponseDto;
 import com.example.shoppingmall.model.Book;
 import com.example.shoppingmall.service.MallService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.example.shoppingmall.dto.request.LoginRequestDto;
 
@@ -78,23 +77,36 @@ public class MallController {
     // 로그인 (세션 요청/생성)
     @PostMapping("/login")
     public LoginResponseDto login(@RequestBody LoginRequestDto loginRequestDto, HttpServletRequest request){
-        System.out.println("전달받은 로그인 정보 => " + loginRequestDto);
+       System.out.println("전달받은 로그인 정보 => " + loginRequestDto);
 
         LoginResponseDto loginResponseDto = mallService.logIn(loginRequestDto);
-        System.out.println("response => " + loginResponseDto);
 
         if(loginResponseDto.getResultCode() == 1){
-            httpSession = request.getSession();
-            httpSession.setAttribute("LoginUser", loginResponseDto.getCustnum());
+            httpSession = request.getSession(true);
+            // 생성된 세션이 있다면 세션 반환, 없다면 세션 생성해 반환
+            httpSession.setAttribute("LoginUser", loginResponseDto);
+            // 세션 설정
+            loginResponseDto = (LoginResponseDto) httpSession.getAttribute("LoginUser");
+            // 세션 읽기
             System.out.println("로그인 성공");
-        } if(loginResponseDto.getResultCode() != 1){
+        } else {
             System.out.println("로그인 실패");
         }
-//        else {
-//            System.out.println("로그인 실패");
-//        }
+
+//        loginResponseDto = (LoginResponseDto) httpSession.getAttribute("LoginUser");
 
         return loginResponseDto;
 
+    }
+
+    // 로그아웃
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request) {
+
+        httpSession = request.getSession();
+        httpSession.invalidate();
+        if (httpSession == null || !request.isRequestedSessionIdValid()) {
+            System.out.println("세션이 무효화 상태입니다.");
+        }
     }
 }

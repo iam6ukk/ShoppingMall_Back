@@ -6,8 +6,11 @@ import com.example.shoppingmall.dto.response.LoginResponseDto;
 import com.example.shoppingmall.model.Book;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface MallService {
