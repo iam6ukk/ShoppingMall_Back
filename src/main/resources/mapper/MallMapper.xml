@@ -30,4 +30,16 @@
         FROM customers
         WHERE custid=#{custid} AND custpwd=#{custpwd};
     </select>
+
+    <!-- 회원가입 -->
+    <insert id="insertCustInfo" parameterType="com.example.shoppingmall.dto.CustomersDto">
+        INSERT INTO customers(custname, custid, custpwd, address) VALUES (#{custname}, #{custid}, #{custpwd}, #{address});
+    </insert>
+
+    <!-- -->
+    <select id="custIdCheck" parameterType="com.example.shoppingmall.dto.CustomersDto" resultType="com.example.shoppingmall.dto.response.idCheckResponseDto">
+        SELECT custid
+        FROM customers
+        where custId != #{custid};
+    </select>
 </mapper>

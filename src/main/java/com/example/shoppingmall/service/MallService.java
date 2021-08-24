@@ -1,8 +1,11 @@
 package com.example.shoppingmall.service;
 
 import com.example.shoppingmall.dto.BooksDto;
+import com.example.shoppingmall.dto.CustomersDto;
 import com.example.shoppingmall.dto.request.LoginRequestDto;
+import com.example.shoppingmall.dto.request.idCheckRequestDto;
 import com.example.shoppingmall.dto.response.LoginResponseDto;
+import com.example.shoppingmall.dto.response.idCheckResponseDto;
 import com.example.shoppingmall.model.Book;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
@@ -33,5 +36,10 @@ public interface MallService {
     // 로그인
     LoginResponseDto logIn(LoginRequestDto loginRequestDto);
 
+    // 회원가입
+    CustomersDto insertCustInfo(CustomersDto customersDto);
+
+    // 아이디 중복 확인
+    idCheckResponseDto custIdCheck(idCheckRequestDto checkRequestDto);
 }
 

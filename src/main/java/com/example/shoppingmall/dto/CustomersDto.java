@@ -9,4 +9,5 @@ public class CustomersDto {
     public String custid;
     public String custpwd;
     public String custname;
+    public String address;
 }

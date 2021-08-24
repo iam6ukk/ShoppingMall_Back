@@ -2,8 +2,12 @@ package com.example.shoppingmall.controller;
 
 import com.example.shoppingmall.dto.BooksDto;
 
+import com.example.shoppingmall.dto.CustomersDto;
+import com.example.shoppingmall.dto.request.idCheckRequestDto;
 import com.example.shoppingmall.dto.response.LoginResponseDto;
+import com.example.shoppingmall.dto.response.idCheckResponseDto;
 import com.example.shoppingmall.model.Book;
+import com.example.shoppingmall.model.Customer;
 import com.example.shoppingmall.service.MallService;
 import com.github.pagehelper.PageInfo;
 import com.example.shoppingmall.dto.request.LoginRequestDto;
@@ -97,6 +101,23 @@ public class MallController {
 
         return loginResponseDto;
 
+    }
+
+    // 회원 가입
+    @PostMapping("/signup")
+    public CustomersDto insertCustInfo(@RequestBody CustomersDto customersDto){
+        CustomersDto c = mallService.insertCustInfo(customersDto);
+        System.out.println("가입 정보 => " + c);
+        return c;
+    }
+
+    // 아이디 중복 검사
+    @PostMapping("/signup/idcheck")
+    public idCheckResponseDto custIdCheck(@RequestBody idCheckRequestDto checkRequestDto){
+        idCheckResponseDto check = mallService.custIdCheck(checkRequestDto);
+        System.out.println("전달받은 아이디 결과 => " + check);
+
+        return check;
     }
 
     // 로그아웃

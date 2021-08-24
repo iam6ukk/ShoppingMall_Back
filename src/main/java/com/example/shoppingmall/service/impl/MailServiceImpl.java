@@ -3,7 +3,9 @@ package com.example.shoppingmall.service.impl;
 import com.example.shoppingmall.dto.BooksDto;
 import com.example.shoppingmall.dto.CustomersDto;
 import com.example.shoppingmall.dto.request.LoginRequestDto;
+import com.example.shoppingmall.dto.request.idCheckRequestDto;
 import com.example.shoppingmall.dto.response.LoginResponseDto;
+import com.example.shoppingmall.dto.response.idCheckResponseDto;
 import com.example.shoppingmall.mapper.MallMapper;
 import com.example.shoppingmall.model.Book;
 import com.example.shoppingmall.model.Customer;
@@ -11,6 +13,7 @@ import com.example.shoppingmall.service.MallService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.catalina.util.CustomObjectInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
@@ -132,6 +135,8 @@ public class MailServiceImpl implements MallService {
                 .build();
     }
 
+
+    // 로그인
     @Override
     public LoginResponseDto logIn(LoginRequestDto loginRequestDto) {
         LoginResponseDto l = mallMapper.logIn(loginRequestDto);
@@ -145,4 +150,15 @@ public class MailServiceImpl implements MallService {
         return l;
     }
 
+    //회원가입
+    @Override
+    public CustomersDto insertCustInfo(CustomersDto customersDto){
+        return mallMapper.insertCustInfo(customersDto);
+    }
+
+    // 아이디 중복확인
+    @Override
+    public idCheckResponseDto custIdCheck(idCheckRequestDto checkRequestDto) {
+        return mallMapper.custIdCheck(checkRequestDto);
+    }
 }

@@ -23,4 +23,9 @@ public class Customer {
     @Column(name = "custname")
     private String custname;
 
+
+
+    @Column(name="address")
+    private String address;
+
 }
