@@ -40,6 +40,6 @@ public interface MallService {
     CustomersDto insertCustInfo(CustomersDto customersDto);
 
     // 아이디 중복 확인
-    idCheckResponseDto custIdCheck(idCheckRequestDto checkRequestDto);
+    int custIdCheck(String custid);
 }
 

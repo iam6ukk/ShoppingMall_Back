@@ -112,10 +112,13 @@ public class MallController {
     }
 
     // 아이디 중복 검사
+
     @PostMapping("/signup/idcheck")
-    public idCheckResponseDto custIdCheck(@RequestBody idCheckRequestDto checkRequestDto){
-        idCheckResponseDto check = mallService.custIdCheck(checkRequestDto);
+    public int custIdCheck(@RequestBody String custid){
+        int check = mallService.custIdCheck(custid);
         System.out.println("전달받은 아이디 결과 => " + check);
+        // 반환 값이 0이면 아이디 중복 X
+        // 반환 값이 1이면 아이디 중복 O
 
         return check;
     }

@@ -3,7 +3,6 @@ package com.example.shoppingmall.mapper;
 
 import com.example.shoppingmall.dto.CustomersDto;
 import com.example.shoppingmall.dto.request.idCheckRequestDto;
-import com.example.shoppingmall.dto.response.idCheckResponseDto;
 import com.example.shoppingmall.model.Book;
 import com.example.shoppingmall.dto.request.LoginRequestDto;
 
@@ -34,6 +33,6 @@ public interface MallMapper {
     CustomersDto insertCustInfo(CustomersDto customersDto);
 
     // 아이디 중복 검사
-    idCheckResponseDto custIdCheck(idCheckRequestDto checkRequestDto);
+    int custIdCheck(String custid);
 
 }

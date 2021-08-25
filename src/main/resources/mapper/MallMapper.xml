@@ -36,10 +36,10 @@
         INSERT INTO customers(custname, custid, custpwd, address) VALUES (#{custname}, #{custid}, #{custpwd}, #{address});
     </insert>
 
-    <!-- -->
-    <select id="custIdCheck" parameterType="com.example.shoppingmall.dto.CustomersDto" resultType="com.example.shoppingmall.dto.response.idCheckResponseDto">
-        SELECT custid
+    <!-- 아이디 중복 검사 -->
+    <select id="custIdCheck" parameterType="com.example.shoppingmall.dto.CustomersDto" resultType="int">
+        SELECT count(*)
         FROM customers
-        where custId != #{custid};
+        where custid = #{custid};
     </select>
 </mapper>

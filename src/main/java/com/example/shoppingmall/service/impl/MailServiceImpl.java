@@ -150,7 +150,7 @@ public class MailServiceImpl implements MallService {
         return l;
     }
 
-    //회원가입
+    // 회원가입
     @Override
     public CustomersDto insertCustInfo(CustomersDto customersDto){
         return mallMapper.insertCustInfo(customersDto);
@@ -158,7 +158,12 @@ public class MailServiceImpl implements MallService {
 
     // 아이디 중복확인
     @Override
-    public idCheckResponseDto custIdCheck(idCheckRequestDto checkRequestDto) {
-        return mallMapper.custIdCheck(checkRequestDto);
+    public int custIdCheck(String custid) {
+        custid = custid.replace("=", "");
+        System.out.println(custid);
+        int result =  mallMapper.custIdCheck(custid);
+
+
+        return result;
     }
 }
